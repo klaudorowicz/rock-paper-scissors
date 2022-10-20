@@ -5,9 +5,6 @@ const scissors = "Scissors";
 
 let choices = [rock, paper, scissors];
 
-console.log(choices);
-console.log(typeof(choices));
-
 
 // Function which choose random element 
 function random(min, max) {
@@ -58,18 +55,14 @@ let scoreComputer = 0;
 let scorePlayer = 0;
 
 
-// Declaration two parameters to compare (Player vs Comp)
-const computerSelection = getComputerChoice(choices);
-const playerSelection = getComputerChoice(choices);
-
 // Function that plays a single round of Rock Paper Scissors
 function playRound(computerSelection, playerSelection) {
   computerSelection = computerSelection.toLowerCase();
   playerSelection = playerSelection.toLowerCase();
-  console.log("computer have = " + computerSelection);
-  console.log("player have = " + playerSelection);
+  console.log("computer has = " + computerSelection);
+  console.log("player has = " + playerSelection);
 
-
+  // Operation SWITCH (boolean)
   switch (true) {
 
    // Result = Draw
@@ -77,7 +70,7 @@ function playRound(computerSelection, playerSelection) {
       console.log("DRAW");
     break;
 
-    // If computer choose Rock
+    // If computer choose Rock (IF)
     case (computerSelection === "rock"):
       if (playerSelection === "scissors") {
         scoreComputer += 1;
@@ -88,7 +81,7 @@ function playRound(computerSelection, playerSelection) {
       } 
     break;
 
-    // If computer choose Paper
+    // If computer choose Paper (IF)
     case (computerSelection === "paper"):
       if (playerSelection === "rock") {
         scoreComputer += 1;
@@ -99,17 +92,42 @@ function playRound(computerSelection, playerSelection) {
       } 
     break;
 
-    // If computer choose Scissors
+    // If computer choose Scissors (Ternary operator)
     case (computerSelection === "scissors"):
-      if (playerSelection === "paper") {
-        scoreComputer += 1;
-        console.log(`+1 for computer, sum comp = ${scoreComputer}`);
-      } else {
-        scorePlayer += 1;
-        console.log(`+1 for player, sum player = ${scorePlayer}`);
-      } 
+      (playerSelection === "paper") 
+        ? (scoreComputer += 1,
+        console.log(`+1 for computer, sum comp = ${scoreComputer}`))
+        : (scorePlayer += 1,
+        console.log(`+1 for player, sum player = ${scorePlayer}`))
     break;
  }
 }
 
-playRound(computerSelection, playerSelection);
+
+function game() {
+  let victoriesNumber = 5; // max 20-25 for i < 100 or do infinity for(;;)
+  win: for (i=0; i<100; i++) {
+
+    // Declaration two parameters to compare (Player vs Comp) and assignment them
+    const computerSelection = getComputerChoice(choices);
+    const playerSelection = getComputerChoice(choices);
+    
+    playRound(computerSelection, playerSelection);
+
+    // Check if the winner exists
+    if ((scoreComputer >= victoriesNumber) || (scorePlayer >= victoriesNumber)) {
+      // Check who is the winner
+      (scoreComputer > scorePlayer) ? winner = "Computer" : winner = "Player";
+      console.log(`The winner is: ${winner} !!!`)
+      console.log(`Score: Computer has ${scoreComputer}, Player has ${scorePlayer}`)
+      break win;
+    }
+
+    // Overflow iterations
+    if (i === 99) {
+      console.log ("Too many iterations or something was wrong");
+    }
+  }
+}
+
+game()
