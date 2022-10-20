@@ -20,7 +20,7 @@ function getComputerChoice(choices) {
 }
 
 
-// Testing section for count probability of drawing
+// Testing section for count probability of tie
   /*
   let testCalcRock = 0;
   let testCalcPaper = 0;
@@ -65,9 +65,9 @@ function playRound(computerSelection, playerSelection) {
   // Operation SWITCH (boolean)
   switch (true) {
 
-   // Result = Draw
+   // Result = Tie
     case (computerSelection === playerSelection):
-      console.log("DRAW");
+      console.log("TIE");
     break;
 
     // If computer choose Rock (IF)
@@ -130,4 +130,5 @@ function game() {
   }
 }
 
+// Run the game
 game()
