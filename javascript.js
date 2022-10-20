@@ -54,12 +54,62 @@ let calcRock = 0;
 let calcPaper = 0;
 let calcScissors = 0;
 
+let scoreComputer = 0;
+let scorePlayer = 0;
+
 
 // Declaration two parameters to compare (Player vs Comp)
-const computerSelection = getComputerChoice();
-const playerSelection = "Rock";
+const computerSelection = getComputerChoice(choices);
+const playerSelection = getComputerChoice(choices);
 
 // Function that plays a single round of Rock Paper Scissors
 function playRound(computerSelection, playerSelection) {
+  computerSelection = computerSelection.toLowerCase();
+  playerSelection = playerSelection.toLowerCase();
+  console.log("computer have = " + computerSelection);
+  console.log("player have = " + playerSelection);
 
+
+  switch (true) {
+
+   // Result = Draw
+    case (computerSelection === playerSelection):
+      console.log("DRAW");
+    break;
+
+    // If computer choose Rock
+    case (computerSelection === "rock"):
+      if (playerSelection === "scissors") {
+        scoreComputer += 1;
+        console.log(`+1 for computer, sum comp = ${scoreComputer}`);
+      } else {
+        scorePlayer += 1;
+        console.log(`+1 for player, sum player = ${scorePlayer}`);
+      } 
+    break;
+
+    // If computer choose Paper
+    case (computerSelection === "paper"):
+      if (playerSelection === "rock") {
+        scoreComputer += 1;
+        console.log(`+1 for computer, sum comp = ${scoreComputer}`);
+      } else {
+        scorePlayer += 1;
+        console.log(`+1 for player, sum player = ${scorePlayer}`);
+      } 
+    break;
+
+    // If computer choose Scissors
+    case (computerSelection === "scissors"):
+      if (playerSelection === "paper") {
+        scoreComputer += 1;
+        console.log(`+1 for computer, sum comp = ${scoreComputer}`);
+      } else {
+        scorePlayer += 1;
+        console.log(`+1 for player, sum player = ${scorePlayer}`);
+      } 
+    break;
+ }
 }
+
+playRound(computerSelection, playerSelection);
