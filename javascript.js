@@ -4,8 +4,8 @@ const paper = "paper";
 const scissors = "scissors";
 let winner = '';
 const roundResult = document.createElement('div');
-const result = document.querySelector('.result');
 const score = document.querySelector('.score');
+const lastGame = document.querySelector('.lastGame');
 const computerScore = document.querySelector('.computerScore');
 const playerScore = document.querySelector('.playerScore');
 
@@ -74,7 +74,7 @@ function playRound(computerSelection, playerSelection) {
     case (computerSelection === playerSelection):
       console.log("TIE");
       roundResult.textContent = 'Tie';
-      score.appendChild(roundResult);
+      lastGame.appendChild(roundResult);
     break;
 
     // If computer choose Rock (IF)
@@ -83,12 +83,12 @@ function playRound(computerSelection, playerSelection) {
         scoreComputer += 1;
         console.log(`+1 for computer`);
         roundResult.textContent = `+1 for computer`;
-        score.appendChild(roundResult);
+        lastGame.appendChild(roundResult);
       } else {
         scorePlayer += 1;
         console.log(`+1 for player`);
         roundResult.textContent = `+1 for player`;
-        score.appendChild(roundResult);
+        lastGame.appendChild(roundResult);
 
       } 
     break;
@@ -99,13 +99,13 @@ function playRound(computerSelection, playerSelection) {
         scoreComputer += 1;
         console.log(`+1 for computer`);
         roundResult.textContent = `+1 for computer`;
-        score.appendChild(roundResult);
+        lastGame.appendChild(roundResult);
 
       } else {
         scorePlayer += 1;
         console.log(`+1 for player`);
         roundResult.textContent = `+1 for player`;
-        score.appendChild(roundResult);
+        lastGame.appendChild(roundResult);
 
       } 
     break;
@@ -116,15 +116,14 @@ function playRound(computerSelection, playerSelection) {
         ? (scoreComputer += 1,
         console.log(`+1 for computer`),
         roundResult.textContent = `+1 for computer`,
-        score.appendChild(roundResult))
+        lastGame.appendChild(roundResult))
         : (scorePlayer += 1,
         console.log(`+1 for player`),
         roundResult.textContent = `+1 for player`,
-        score.appendChild(roundResult));
+        lastGame.appendChild(roundResult));
     break;
  }
 }
-
 
     
   function checkWinner() {
@@ -135,9 +134,8 @@ function playRound(computerSelection, playerSelection) {
 
     (scoreComputer > scorePlayer) ? winner = "Computer" : winner = "Player";
   
-    const divWinner = document.createElement('div');
-    divWinner.textContent = `The winner is: ${winner} !!!`;
-    result.appendChild(divWinner);
+    roundResult.textContent = `The winner is: ${winner} !!!`;
+    lastGame.appendChild(roundResult);
 
     const scores = document.createElement('div');
     score.textContent =`Score: Computer has ${scoreComputer}, Player has ${scorePlayer}`;
@@ -163,9 +161,6 @@ function game() {
 }
 
 
-
-
-// Functions
 // Declaration two parameters to compare (Player vs Comp) and assignment them
 function computerSelection() {
   const computerSelection = getComputerChoice(choices);
@@ -187,9 +182,3 @@ playerClick.forEach((button) => {
     
   });
 });
-
-
-
-
-
-
