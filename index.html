@@ -6,14 +6,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rock - Paper - Scissors</title>
   <link href="style.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/fontello.css">
 </head>
 <body>
-  
-  <button id="rock">Rock</button>
-  <button id="paper">Paper</button>
-  <button id="scissors">Scissors</button>
+
+  <header>
+    <div class="title">
+      <div class="black">Rock&nbsp</div>
+      <div class="white">Paper&nbsp</div>
+      <div class="blue">Scissors</div>
+    </div>
+  </header>
 
   <main>
+
+  <div class="buttons">
+    <button id="rock" class="black">
+      <i class="icon-hand-grab-o"></i><br>Rock
+    </button>
+    <button id="paper" class="white">
+      <i class="icon-hand-paper-o"></i><br>Paper
+    </button>
+    <button id="scissors" class="blue">
+      <i class="icon-hand-scissors-o"></i><br>Scissors
+    </button>
+  </div>
+
     
     <br>
 
@@ -28,6 +46,14 @@
 
   </main>
 
+  <footer>
+    <div class="footer">
+        Copyright &copy &nbsp  
+        <a href="https://github.com/klaudorowicz" target="_blank" rel="noreferrer noopener">
+          klaudorowicz <i class="icon-github-circled"></i>
+        </a>
+    </div>
+  </footer>
 
   <script src="javascript.js"></script>
 

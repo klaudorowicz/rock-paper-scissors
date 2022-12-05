@@ -130,8 +130,8 @@ function playRound(computerSelection, playerSelection) {
     let victoriesNumber = 5;
   // Check if the winner exists
   if ((scoreComputer >= victoriesNumber) || (scorePlayer >= victoriesNumber)) {
-    // Check who is the winner
 
+    // Check who is the winner
     (scoreComputer > scorePlayer) ? winner = "Computer" : winner = "Player";
   
     roundResult.textContent = `The winner is: ${winner} !!!`;
