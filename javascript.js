@@ -8,6 +8,27 @@ const score = document.querySelector('.score');
 const lastGame = document.querySelector('.lastGame');
 const computerScore = document.querySelector('.computerScore');
 const playerScore = document.querySelector('.playerScore');
+const computerChoice = document.querySelector('.computerChoice');
+const playerChoice = document.querySelector('.playerChoice');
+
+const rockIcon = document.createElement('i');
+rockIcon.classList.add('icon-hand-grab-o');
+const paperIcon = document.createElement('i');
+paperIcon.classList.add('icon-hand-paper-o');
+const scissorsIcon = document.createElement('i');
+scissorsIcon.classList.add('icon-hand-peace-o');
+
+const rockIconC = document.createElement('i');
+rockIconC.classList.add('icon-hand-grab-o');
+const paperIconC = document.createElement('i');
+paperIconC.classList.add('icon-hand-paper-o');
+const scissorsIconC = document.createElement('i');
+scissorsIconC.classList.add('icon-hand-peace-o');
+
+const arrowLeft = document.createElement('i');
+arrowLeft.classList.add('icon-left-thin');
+const arrowRight = document.createElement('i');
+arrowRight.classList.add('icon-right-thin');
 
 let choices = [rock, paper, scissors];
 
@@ -62,34 +83,25 @@ let scorePlayer = 0;
 // Function that play a single round of Rock Paper Scissors
 
 function playRound(computerSelection, playerSelection) {
-  //computerSelection = computerSelection.toLowerCase();
-  //playerSelection = playerSelection.toLowerCase();
-  console.log("computer has = " + computerSelection);
-  console.log("player has = " + playerSelection);
 
+  choiceIcon( playerSelection, computerSelection);
+  removeAllChild(lastGame);
   // Operation SWITCH (boolean)
   switch (true) {
 
    // Result = Tie
     case (computerSelection === playerSelection):
-      console.log("TIE");
-      roundResult.textContent = 'Tie';
-      lastGame.appendChild(roundResult);
+      lastGame.textContent = '=';
     break;
 
     // If computer choose Rock (IF)
     case (computerSelection === "rock"):
       if (playerSelection === "scissors") {
         scoreComputer += 1;
-        console.log(`+1 for computer`);
-        roundResult.textContent = `+1 for computer`;
-        lastGame.appendChild(roundResult);
+        lastGame.appendChild(arrowLeft);
       } else {
         scorePlayer += 1;
-        console.log(`+1 for player`);
-        roundResult.textContent = `+1 for player`;
-        lastGame.appendChild(roundResult);
-
+        lastGame.appendChild(arrowRight);
       } 
     break;
 
@@ -97,15 +109,11 @@ function playRound(computerSelection, playerSelection) {
     case (computerSelection === "paper"):
       if (playerSelection === "rock") {
         scoreComputer += 1;
-        console.log(`+1 for computer`);
-        roundResult.textContent = `+1 for computer`;
-        lastGame.appendChild(roundResult);
+        lastGame.appendChild(arrowLeft);
 
       } else {
         scorePlayer += 1;
-        console.log(`+1 for player`);
-        roundResult.textContent = `+1 for player`;
-        lastGame.appendChild(roundResult);
+        lastGame.appendChild(arrowRight);
 
       } 
     break;
@@ -114,15 +122,30 @@ function playRound(computerSelection, playerSelection) {
     case (computerSelection === "scissors"):
       (playerSelection === "paper") 
         ? (scoreComputer += 1,
-        console.log(`+1 for computer`),
-        roundResult.textContent = `+1 for computer`,
-        lastGame.appendChild(roundResult))
+          lastGame.appendChild(arrowLeft))
         : (scorePlayer += 1,
-        console.log(`+1 for player`),
-        roundResult.textContent = `+1 for player`,
-        lastGame.appendChild(roundResult));
+          lastGame.appendChild(arrowRight))
     break;
  }
+}
+
+function removeAllChild(parent) {
+  while (parent.firstChild) {
+    parent.removeChild(parent.firstChild);
+  };
+};
+
+
+function choiceIcon(player, computer) {
+  removeAllChild(playerChoice);
+  if (player === "rock") playerChoice.appendChild(rockIcon);
+  if (player === "paper") playerChoice.appendChild(paperIcon);
+  if (player === "scissors") playerChoice.appendChild(scissorsIcon);
+
+  removeAllChild(computerChoice);
+  if (computer === "rock") computerChoice.appendChild(rockIconC);
+  if (computer === "paper") computerChoice.appendChild(paperIconC);
+  if (computer === "scissors") computerChoice.appendChild(scissorsIconC);
 }
 
     
@@ -132,14 +155,22 @@ function playRound(computerSelection, playerSelection) {
   if ((scoreComputer >= victoriesNumber) || (scorePlayer >= victoriesNumber)) {
 
     // Check who is the winner
-    (scoreComputer > scorePlayer) ? winner = "Computer" : winner = "Player";
-  
-    roundResult.textContent = `The winner is: ${winner} !!!`;
-    lastGame.appendChild(roundResult);
+    if (scoreComputer > scorePlayer) {
+      winner = "Computer";
+      computerScore.style.background =`rgba(10, 147, 211, 0.6)`;
+      computerScore.style.padding =`8px`;
+      computerScore.style.border =`1px solid black`;
+      lastGame.textContent = `The winner is: ${winner}. :(`;
+      lastGame.style.cssText = `box-shadow: 0px 5px 50px rgb(0, 0, 0);`;
 
-    const scores = document.createElement('div');
-    score.textContent =`Score: Computer has ${scoreComputer}, Player has ${scorePlayer}`;
-    score.appendChild(scores);
+    } else {
+      winner = "Player";
+      playerScore.style.background =`rgba(10, 147, 211, 0.6)`;
+      playerScore.style.padding =`8px`;
+      playerScore.style.border =`1px solid black`;
+      lastGame.textContent = `YOU are the WINNER !!!`; 
+      lastGame.style.cssText = `box-shadow: 0px 5px 60px 20px gold;`;
+    }
   }
 }
 
@@ -153,6 +184,7 @@ function game() {
     winner = '';
   };
 
+  lastGame.style['font-size'] = '100px';
   playRound(computerSelection(), playerSelection);
   checkWinner();
   // Display scores
@@ -173,12 +205,9 @@ let playerSelection = '';
 let playerClick = document.querySelectorAll('button');
 playerClick.forEach((button) => {
   button.addEventListener('click', function(e) {
+    if(winner) location.reload();
     playerSelection = e.target.id;
-    console.log(button.id);
-    if(winner) {
-      location.reload();
-    }
+    lastGame.style.cssText = `box-shadow: 0px 0px 0px black`;
     return game();
-    
   });
 });
