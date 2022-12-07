@@ -60,6 +60,7 @@ button {
   line-height: 1.4;
   color: rgb(6, 59, 83);
   box-shadow: 7px 7px 3px rgb(74, 104, 124);
+  cursor: pointer;
 }
 
 button:hover {
